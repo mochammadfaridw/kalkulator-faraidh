@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>Kalkulator Waris Islam | Mobile Friendly</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f7f6;
+            color: #1e2f28;
+            line-height: 1.5;
+        }
+
+        /* Header - lebih kecil di mobile */
+        .bsi-header {
+            background: linear-gradient(135deg, #004a2f 0%, #006b46 100%);
+            padding: 0.8rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            background: #f8b400;
+            width: 34px;
+            height: 34px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #004a2f;
+            font-weight: 800;
+        }
+
+        .logo-text h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .logo-text p {
+            font-size: 0.6rem;
+            color: #d1e8df;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 16px;
+        }
+
+        .nav-links a {
+            color: #e0f0ea;
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* Hero section - compact */
+        .hero-section {
+            background: linear-gradient(120deg, #ffffff 0%, #f0f7f3 100%);
+            padding: 24px 0 20px;
+            border-bottom: 1px solid #e0ebe5;
+        }
+
+        .hero-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #004a2f;
+            margin-bottom: 8px;
+        }
+
+        .hero-subtitle {
+            color: #5a6e63;
+            font-size: 0.85rem;
+        }
+
+        /* Cards - lebih rapat di mobile */
+        .card-modern {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+            padding: 20px 18px;
+            margin-bottom: 20px;
+            border: 1px solid #eef2f0;
+        }
+
+        .card-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #f8b400;
+        }
+
+        .card-title .step-badge {
+            background: #004a2f;
+            color: white;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .card-title h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1a2c24;
+        }
+
+        /* Form Grid - single column di mobile */
+        .form-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .input-group label {
+            font-weight: 600;
+            font-size: 0.8rem;
+            color: #2c4a3a;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .input-group label i {
+            width: 24px;
+            color: #f8b400;
+            font-size: 0.9rem;
+        }
+
+        .input-group input {
+            padding: 12px 14px;
+            border: 1px solid #cfdfd7;
+            border-radius: 14px;
+            font-size: 0.95rem;
+            transition: 0.2s;
+            background: #fefefe;
+            width: 100%;
+        }
+
+        /* Table wrapper - scroll horizontal jika perlu */
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 8px 0 4px;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .waris-table {
+            width: 100%;
+            min-width: 300px;
+            border-collapse: collapse;
+        }
+
+        .waris-table th {
+            text-align: left;
+            padding: 12px 8px 12px 0;
+            font-weight: 700;
+            font-size: 0.8rem;
+            color: #2c4a3a;
+            border-bottom: 1px solid #e0ebe5;
+        }
+
+        .waris-table td {
+            padding: 10px 8px 10px 0;
+            border-bottom: 1px solid #f0f3f1;
+        }
+
+        .waris-table input {
+            width: 85px;
+            padding: 8px 10px;
+            border: 1px solid #cfdfd7;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+
+        /* Tombol - full width di mobile */
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 16px 0 24px;
+        }
+
+        .btn-primary, .btn-secondary {
+            width: 100%;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.2s;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: #004a2f;
+            color: white;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        .btn-primary:active {
+            background: #006b46;
+            transform: scale(0.98);
+        }
+
+        .btn-secondary {
+            background: #eef2f0;
+            color: #2c4a3a;
+        }
+
+        .btn-secondary:active {
+            background: #e0ebe5;
+        }
+
+        /* Result area mobile friendly */
+        .result-container {
+            background: white;
+            border-radius: 20px;
+            margin-top: 16px;
+            overflow: hidden;
+            border: 1px solid #eef2f0;
+        }
+
+        .result-header {
+            background: #f9fcfb;
+            padding: 14px 18px;
+            border-bottom: 1px solid #eef2f0;
+        }
+
+        .result-header h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.1rem;
+            color: #004a2f;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .result-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+
+        .result-table th, .result-table td {
+            padding: 12px 14px;
+            text-align: left;
+            border-bottom: 1px solid #eef2f0;
+        }
+
+        .result-table th {
+            background: #f9fcfb;
+            font-weight: 700;
+            font-size: 0.8rem;
+        }
+
+        .total-row {
+            background: #fef9e6;
+            font-weight: 800;
+        }
+
+        .warning-note {
+            background: #fff8e7;
+            padding: 12px 16px;
+            color: #b76e00;
+            border-radius: 14px;
+            margin: 16px;
+            font-size: 0.75rem;
+            border-left: 3px solid #f8b400;
+        }
+
+        /* info kecil */
+        .info-catatan {
+            font-size: 0.7rem;
+            color: #6b8a7a;
+            margin-top: 12px;
+            background: #f9fcfb;
+            padding: 8px 12px;
+            border-radius: 12px;
+        }
+
+        /* Footer */
+        .bsi-footer {
+            background: #0c261c;
+            color: #bcd9ce;
+            padding: 24px 16px;
+            margin-top: 32px;
+            text-align: center;
+            font-size: 0.7rem;
+        }
+
+        /* tambahan untuk kenyamanan sentuhan */
+        input, button {
+            touch-action: manipulation;
+        }
+
+        @media (min-width: 640px) {
+            .container {
+                padding: 0 24px;
+            }
+            .form-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 20px;
+            }
+            .button-group {
+                flex-direction: row;
+                justify-content: center;
+            }
+            .btn-primary, .btn-secondary {
+                width: auto;
+                min-width: 180px;
+            }
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            .card-title h2 {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header class="bsi-header">
+    <div class="container header-inner">
+        <div class="logo-area">
+            <div class="logo-icon"> ف </div>
+            <div class="logo-text">
+                <h1>Kalkulator Waris</h1>
+                <p>Faraidh • Syariah</p>
+            </div>
+        </div>
+        <div class="nav-links">
+            
+        </div>
+    </div>
+</header>
+
+<section class="hero-section">
+    <div class="container">
+        <div class="hero-title">Hitung Warisan</div>
+        <div class="hero-subtitle">Mudah & akurat sesuai syariat. Lengkap dengan hak-hak sebelum waris.</div>
+    </div>
+</section>
+
+<div class="container">
+    <!-- LANGKAH 1 -->
+    <div class="card-modern">
+        <div class="card-title">
+            <div class="step-badge">1</div>
+            <h2>Harta Peninggalan</h2>
+        </div>
+        <div class="form-grid">
+            <div class="input-group">
+                <label><i class="fas fa-coins"></i> Total Harta (Rp)</label>
+                <input type="number" id="totalHarta" value="200000000" placeholder="contoh: 200000000">
+            </div>
+        </div>
+    </div>
+
+    <!-- LANGKAH 2 -->
+    <div class="card-modern">
+        <div class="card-title">
+            <div class="step-badge">2</div>
+            <h2>Hak Sebelum Waris</h2>
+        </div>
+        <div class="form-grid">
+            <div class="input-group"><label><i class="fas fa-hand-holding-usd"></i> Hutang terkait harta</label><input type="number" id="hutangHarta" value="0"></div>
+            <div class="input-group"><label><i class="fas fa-file-invoice"></i> Hutang pribadi</label><input type="number" id="hutangNonHarta" value="0"></div>
+            <div class="input-group"><label><i class="fas fa-dove"></i> Biaya jenazah</label><input type="number" id="biayaJenazah" value="0"></div>
+            <div class="input-group"><label><i class="fas fa-gavel"></i> Wasiat (maks 1/3)</label><input type="number" id="wasiat" value="0"></div>
+        </div>
+    </div>
+
+    <!-- LANGKAH 3: Ahli Waris dengan tabel responsive -->
+    <div class="card-modern">
+        <div class="card-title">
+            <div class="step-badge">3</div>
+            <h2>Ahli Waris</h2>
+        </div>
+        <div class="table-wrapper">
+            <table class="waris-table">
+                <thead>
+                    <tr><th>Ahli Waris</th><th>Jumlah</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><i class="fas fa-male"></i> Suami</td><td><input type="number" id="suami" min="0" max="1" value="0" step="1"></td></tr>
+                    <tr><td><i class="fas fa-female"></i> Istri</td><td><input type="number" id="istri" min="0" value="0" step="1"></td></tr>
+                    <tr><td><i class="fas fa-user-tie"></i> Ayah</td><td><input type="number" id="ayah" min="0" max="1" value="0" step="1"></td></tr>
+                    <tr><td><i class="fas fa-female"></i> Ibu</td><td><input type="number" id="ibu" min="0" max="1" value="0" step="1"></td></tr>
+                    <tr><td><i class="fas fa-baby-carriage"></i> Anak Laki-laki</td><td><input type="number" id="anakLk" min="0" value="0" step="1"></td></tr>
+                    <tr><td><i class="fas fa-baby"></i> Anak Perempuan</td><td><input type="number" id="anakPr" min="0" value="0" step="1"></td></tr>
+                    <tr><td><i class="fas fa-users"></i> Saudara Kandung Lk</td><td><input type="number" id="sdraLk" min="0" value="0" step="1"></td></tr>
+                    <tr><td><i class="fas fa-user-friends"></i> Saudari Kandung Pr</td><td><input type="number" id="sdraPr" min="0" value="0" step="1"></td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="info-catatan">
+            <i class="fas fa-info-circle"></i> Saudara kandung hanya mendapat warisan jika TIDAK ADA anak dan TIDAK ADA ayah. Anak laki-laki mendapat 2x bagian anak perempuan.
+        </div>
+    </div>
+
+    <div class="button-group">
+        <button class="btn-primary" id="hitungBtn"><i class="fas fa-calculator"></i> Hitung Waris</button>
+        <button class="btn-secondary" id="resetBtn"><i class="fas fa-undo-alt"></i> Reset</button>
+    </div>
+
+    <!-- HASIL -->
+    <div id="resultContainer" style="display: none;">
+        <div class="result-container">
+            <div class="result-header">
+                <h3><i class="fas fa-chart-pie"></i> Hasil Pembagian</h3>
+            </div>
+            <div id="hasilDetail"></div>
+        </div>
+    </div>
+</div>
+
+<footer class="bsi-footer">
+    <div class="container">
+        <p>© 2026 Kalkulator Waris Islam | Firdaus A.j </p>
+        <p style="margin-top: 6px;"><i class="fas fa-leaf"></i> Suami: 1/2 (tanpa anak) / 1/4 (dengan anak) | Istri: 1/4 / 1/8 | Ashabah laki : perempuan = 2:1</p>
+    </div>
+</footer>
+
+<script>
+    (function() {
+        function getNumber(id) {
+            let val = parseFloat(document.getElementById(id).value);
+            return isNaN(val) ? 0 : val;
+        }
+        function getInt(id) {
+            let v = parseInt(document.getElementById(id).value);
+            return isNaN(v) ? 0 : v;
+        }
+
+        function formatRupiah(angka) {
+            return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(angka);
+        }
+
+        function resetForm() {
+            document.getElementById('totalHarta').value = '200000000';
+            document.getElementById('hutangHarta').value = '0';
+            document.getElementById('hutangNonHarta').value = '0';
+            document.getElementById('biayaJenazah').value = '0';
+            document.getElementById('wasiat').value = '0';
+            document.getElementById('suami').value = '0';
+            document.getElementById('istri').value = '0';
+            document.getElementById('ayah').value = '0';
+            document.getElementById('ibu').value = '0';
+            document.getElementById('anakLk').value = '0';
+            document.getElementById('anakPr').value = '0';
+            document.getElementById('sdraLk').value = '0';
+            document.getElementById('sdraPr').value = '0';
+            document.getElementById('resultContainer').style.display = 'none';
+        }
+
+        function hitungWaris() {
+            let totalHarta = getNumber('totalHarta');
+            let hutangHartaVal = getNumber('hutangHarta');
+            let hutangNon = getNumber('hutangNonHarta');
+            let jenazah = getNumber('biayaJenazah');
+            let wasiatVal = getNumber('wasiat');
+
+            if (totalHarta <= 0) { alert("Total harta harus lebih dari 0"); return; }
+
+            const maxWasiat = totalHarta / 3;
+            let wasiatFinal = wasiatVal;
+            let wasiatWarning = false;
+            if (wasiatVal > maxWasiat) { wasiatFinal = maxWasiat; wasiatWarning = true; }
+
+            let totalPotongan = hutangHartaVal + hutangNon + jenazah + wasiatFinal;
+            let hartaBersih = totalHarta - totalPotongan;
+            if (hartaBersih < 0) hartaBersih = 0;
+
+            if (hartaBersih === 0) {
+                tampilkanError("Setelah potongan hak, tidak tersisa harta waris.", wasiatWarning, maxWasiat);
+                return;
+            }
+
+            let suami = getInt('suami') > 0 ? 1 : 0;
+            let istri = getInt('istri');
+            let ayah = getInt('ayah') > 0 ? 1 : 0;
+            let ibu = getInt('ibu') > 0 ? 1 : 0;
+            let anakLk = getInt('anakLk');
+            let anakPr = getInt('anakPr');
+            let saudaraLk = getInt('sdraLk');
+            let saudaraPr = getInt('sdraPr');
+
+            const haveChild = (anakLk + anakPr) > 0;
+
+            let bagianSuami = 0, bagianIstriTotal = 0, bagianIbu = 0, bagianAyahFardh = 0;
+            if (suami) bagianSuami = (haveChild ? 1/4 : 1/2) * hartaBersih;
+            if (istri > 0) bagianIstriTotal = (haveChild ? 1/8 : 1/4) * hartaBersih;
+            if (ibu) {
+                if (haveChild) bagianIbu = (1/6) * hartaBersih;
+                else {
+                    let totalSaudara = saudaraLk + saudaraPr;
+                    if (totalSaudara >= 2) bagianIbu = (1/6) * hartaBersih;
+                    else {
+                        let setelahPasangan = hartaBersih - bagianSuami - bagianIstriTotal;
+                        if (setelahPasangan < 0) setelahPasangan = 0;
+                        bagianIbu = (1/3) * setelahPasangan;
+                    }
+                }
+            }
+            if (ayah && haveChild) bagianAyahFardh = (1/6) * hartaBersih;
+
+            let totalFardh = bagianSuami + bagianIstriTotal + bagianIbu + bagianAyahFardh;
+            let sisaHarta = hartaBersih - totalFardh;
+            if (sisaHarta < 0) sisaHarta = 0;
+
+            let daftar = [];
+
+            function tambah(nama, total, jumlahOrang = 1, perOrang = null) {
+                daftar.push({ nama, total, jumlahOrang, perOrang });
+            }
+
+            // Ashabah
+            if ((anakLk + anakPr) > 0 && sisaHarta > 0) {
+                let bobot = (anakLk * 2) + (anakPr * 1);
+                if (bobot > 0) {
+                    let unit = sisaHarta / bobot;
+                    if (anakLk) tambah("Anak Laki-laki (ashabah)", unit * 2 * anakLk, anakLk, unit * 2);
+                    if (anakPr) tambah("Anak Perempuan (ashabah)", unit * 1 * anakPr, anakPr, unit);
+                    sisaHarta = 0;
+                }
+            } else if (ayah && !haveChild && sisaHarta > 0) {
+                tambah("Ayah (ashabah)", sisaHarta, 1, sisaHarta);
+                sisaHarta = 0;
+            } else if (!haveChild && ayah === 0 && (saudaraLk + saudaraPr) > 0 && sisaHarta > 0) {
+                let bobot = (saudaraLk * 2) + (saudaraPr * 1);
+                if (bobot > 0) {
+                    let unit = sisaHarta / bobot;
+                    if (saudaraLk) tambah("Saudara Kandung Lk", unit * 2 * saudaraLk, saudaraLk, unit * 2);
+                    if (saudaraPr) tambah("Saudari Kandung Pr", unit * 1 * saudaraPr, saudaraPr, unit);
+                    sisaHarta = 0;
+                }
+            }
+
+            if (suami && bagianSuami > 0) tambah("Suami (fardh)", bagianSuami, 1, bagianSuami);
+            if (istri > 0 && bagianIstriTotal > 0) tambah(`Istri (${istri} org)`, bagianIstriTotal, istri, bagianIstriTotal/istri);
+            if (ibu && bagianIbu > 0) tambah("Ibu", bagianIbu, 1, bagianIbu);
+            if (ayah && bagianAyahFardh > 0) tambah("Ayah (fardh 1/6)", bagianAyahFardh, 1, bagianAyahFardh);
+
+            let catatan = "";
+            if (sisaHarta > 0.01) catatan = `⚠️ Sisa harta ${formatRupiah(sisaHarta)} tidak memiliki ashabah (Baitul Mal).`;
+
+            tampilkanHasil(daftar, hartaBersih, totalHarta, totalPotongan, wasiatWarning, maxWasiat, catatan);
+        }
+
+        function tampilkanHasil(bagianList, hartaBersih, totalAwal, potongan, wasiatWarning, maxWasiat, catatan) {
+            let totalTerbagi = bagianList.reduce((s, i) => s + i.total, 0);
+            let html = `<div style="background:#f9fcfb; padding:12px 16px; border-bottom:1px solid #eef2f0;">
+                            <strong>Harta Bersih:</strong> ${formatRupiah(hartaBersih)}<br>
+                            <span style="font-size:0.75rem;">Potongan: ${formatRupiah(potongan)} (dari ${formatRupiah(totalAwal)})</span>
+                        </div>`;
+            if (wasiatWarning) html += `<div class="warning-note"><i class="fas fa-exclamation-triangle"></i> Wasiat > 1/3, disesuaikan maks ${formatRupiah(maxWasiat)}.</div>`;
+            if (bagianList.length === 0) html += `<div class="warning-note">Tidak ada ahli waris yang berhak.</div>`;
+            else {
+                html += `<table class="result-table">
+                            <thead><tr><th>Ahli Waris</th><th>Total</th><th>Per Orang</th></tr></thead>
+                            <tbody>`;
+                bagianList.forEach(item => {
+                    let per = (item.jumlahOrang > 1 && item.perOrang) ? `${item.jumlahOrang} × ${formatRupiah(item.perOrang)}` : (item.perOrang ? formatRupiah(item.perOrang) : "-");
+                    html += `<tr><td>${item.nama}</td><td>${formatRupiah(item.total)}</td><td>${per}</td></tr>`;
+                });
+                html += `<tr class="total-row"><td><strong>Total Terbagi</strong></td><td colspan="2"><strong>${formatRupiah(totalTerbagi)}</strong></td></tr>`;
+                html += `</tbody></table>`;
+                let selisih = hartaBersih - totalTerbagi;
+                if (Math.abs(selisih) > 0.5) html += `<div class="warning-note">Selisih: ${formatRupiah(selisih)}</div>`;
+            }
+            if (catatan) html += `<div class="warning-note">${catatan}</div>`;
+            document.getElementById('hasilDetail').innerHTML = html;
+            document.getElementById('resultContainer').style.display = 'block';
+            setTimeout(() => document.getElementById('resultContainer').scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+        }
+
+        function tampilkanError(pesan, wasiatWarning, maxWasiat) {
+            let html = `<div class="warning-note">${pesan}</div>`;
+            if (wasiatWarning) html += `<div class="warning-note">Wasiat melebihi 1/3 (maks ${formatRupiah(maxWasiat)}).</div>`;
+            document.getElementById('hasilDetail').innerHTML = html;
+            document.getElementById('resultContainer').style.display = 'block';
+        }
+
+        document.getElementById('hitungBtn').addEventListener('click', hitungWaris);
+        document.getElementById('resetBtn').addEventListener('click', resetForm);
+    })();
+</script>
+</body>
+</html>
